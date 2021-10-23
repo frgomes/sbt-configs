@@ -1,0 +1,47 @@
+**/*.jar
+**/lib/
+**/target/
+**/dist/
+**/tmp/
+**/log/
+**/logs/
+**/generated_scala/
+**/.tmp
+**/.log
+**/.out
+
+# vscode
+**/.vscode
+
+# intellij
+.idea
+.idea_modules
+.lib
+*.lib
+*.iml
+
+# eclipse
+.classpath
+.project
+.settings
+
+# netbeans
+.classpath_nb
+
+# emacs / zile
+**/*~
+**/#*
+**/.#*
+**/.ZILESAVE
+
+# metals
+**/.bsp/
+**/.bloop/
+**/.metals/
+project/metals.sbt
+project/project/
+
+# ensime
+.ensime
+.ensime_lucene
+.ensime_cache/
