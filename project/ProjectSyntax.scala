@@ -4,12 +4,12 @@ object ProjectSyntax {
   import Configs._
 
   val mainDependencyManagement = "compile->compile;test->compile,test;it->compile,test;at->compile,test;ft->compile,test;pt->compile,test;tools->compile,test"
-  val testDependencyManagement = "compile;test"
+  val testDependencyManagement = "compile;test;it;ft;at;pt;tools"
 
   implicit class ImplicitProjectSyntax(project: sbt.Project) {
     implicit val withDefaultConfigurations: sbt.Project =
       project
-        .configs(Compile, Test, IntegrationTest, AcceptanceTest, FunctionalTest, PerformanceTest, ToolsTest)
+        .configs(Compile, Test, IntegrationTest, AcceptanceTest, FunctionalTest, PerformanceTest, Tools)
         .settings(testSettings: _*)
         .settings(itSettings: _*)
         .settings(atSettings: _*)
@@ -56,7 +56,8 @@ object ProjectSyntax {
   def additionalTestFrameworks: Seq[Setting[_]] =
     Seq(
       testFrameworks += new TestFramework("scalaprops.ScalapropsFramework"),
-      testFrameworks += new TestFramework("utest.runner.Framework"))
+      testFrameworks += new TestFramework("utest.runner.Framework",
+    ))
 
   def testSettings: Seq[Setting[_]] =
     inConfig(Test)(Defaults.testSettings ++ additionalTestFrameworks)
@@ -90,7 +91,7 @@ object ProjectSyntax {
       ))
 
   def toolsSettings: Seq[Setting[_]] =
-    inConfig(ToolsTest)(Defaults.testSettings ++ additionalTestFrameworks ++
+    inConfig(Tools)(Defaults.testSettings ++ Classpaths.configSettings ++ additionalTestFrameworks ++
       Seq(
         unmanagedSourceDirectories   ++= (Test / sourceDirectories  ).value,
         unmanagedResourceDirectories ++= (Test / resourceDirectories).value,

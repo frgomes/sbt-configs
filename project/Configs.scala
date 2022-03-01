@@ -1,8 +1,8 @@
 import sbt._
 
 object Configs {
-  val FunctionalTest  = config("ft")    extend (Runtime)
-  val AcceptanceTest  = config("at")    extend (Runtime)
-  val PerformanceTest = config("pt")    extend (Runtime)
-  val ToolsTest       = config("tools") extend (Runtime)
+  val FunctionalTest  = config("ft")    extend (Test)
+  val AcceptanceTest  = config("at")    extend (Test)
+  val PerformanceTest = config("pt")    extend (Test)
+  val Tools           = config("tools") extend (Test)
 }
